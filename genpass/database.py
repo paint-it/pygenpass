@@ -31,15 +31,21 @@ class DatabaseConnection():
 	def create_table(self):
 		'''This method will create table having columns as given below and will pass to execute function ''' 
 		
-		self.cursor_obj.execute("CREATE TABLE passwords(id integer PRIMARY KEY, portal_name text, portal_url real, user_email text, tag text, creation_date text, last_modified text, notes text, level text, importance text)")
+		self.cursor_obj.execute(
+			"CREATE TABLE passwords(id integer PRIMARY KEY, portal_name text, portal_url real, user_email text, tag text, notes text, creation_date text, password text)")
 		self.con.commit()
 	
 	
 
-	def insert_data(self):
+	def insert_data(self, portal_name, portal_url, user_email, tag, notes, password, creation_date):
 		'''This method will insert data in their respective positional argument'''
 		
-		self.cursor_obj.execute('INSERT INTO passwords VALUES(1, "paytm", "www.paytm.com", "mlhanae@gmail.com", "money", "25 dec", "24 dec", "using for food wallet", "strong", "starred")')
+		self.cursor_obj.execute(
+			"INSERT INTO passwords VALUES({name}, {url}, {mail}, {tag}, {notes}, {creation_date}, {password})".format(
+				name=portal_name,url=portal_url,mail=user_email,tag=tag, notes=notes, password=password,
+				creation_date=creation_date
+			)
+		)
 		self.con.commit()
 	
 	
@@ -63,9 +69,9 @@ class DatabaseConnection():
 		self.cursor_obj.execute('UPDATE passwords SET portal_name = "ola",portal_url = "www.ola.com" where id = 1')
 		self.con.commit()
 
-db = DatabaseConnection()
-#db.create_table()
-#db.insert_data()
-db.show_data()
-db.update_data()
-db.show_data()
+# db = DatabaseConnection()
+# #db.create_table()
+# #db.insert_data()
+# db.show_data()
+# db.update_data()
+# db.show_data()

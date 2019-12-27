@@ -2,7 +2,9 @@ import click
 import diceware
 from datetime import datetime
 from passlib.context import CryptContext
+from genpass import database
 
+#db_obj = DatabaseConnection()
 
 @click.group()
 def main():
@@ -29,7 +31,12 @@ def create_pass():
     notes = click.prompt('Enter notes',default="None")
     password = encrypt_pass()
     creation_date = datetime.now()
-    print("\n\n Portal Name: {portal_name}\n Portal URL: {portal_url}\n User Email: {user_email}\n Tags: {tag}\n Notes: {notes}\n Password: {password}\n Creation Date: {creation_date}".format(portal_name=portal_name, portal_url=portal_url, user_email=user_email, tag=tag, notes=notes, password=password, creation_date=creation_date))
+#     print("\n\n Portal Name: {portal_name}\n Portal URL: {portal_url}\n User Email: {user_email}\n Tags: {tag}\n Notes: {notes}\n Password: {password}\n Creation Date: {creation_date}".format(portal_name=portal_name, portal_url=portal_url, user_email=user_email, tag=tag, notes=notes, password=password, creation_date=creation_date))
+    db_obj = database.DatabaseConnection()
+    db_obj.create_table()
+    db_obj.insert_data(portal_name=portal_name, portal_url=portal_url, user_email=user_email, tag=tag, notes=notes,
+                       password=password, creation_date=creation_date)
+
 main.add_command(create_pass)
 
 @main.command(help="printing data")
