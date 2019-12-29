@@ -23,7 +23,7 @@ SOFTWARE.
 import sqlite3 #library for database
 
 class DatabaseConnection(object):
-	""" Class of database entries for users information."""
+	""" Class of database entries for user's information."""
 
 	def __init__(self):
 		"""Used to create database and then to connect with generated databse file"""
@@ -32,7 +32,7 @@ class DatabaseConnection(object):
 		self.cursor_obj = self.con.cursor()
 
 	def create_table(self):
-		"""Checked for table is created? if not then created as per input """
+		"""Checked for table is created? if not then created as per required values """
 		
 		self.cursor_obj.execute(
 			"""
@@ -46,8 +46,8 @@ class DatabaseConnection(object):
 		self.portal_name = portal_name
 		self.password = password
 
-	# TODO: addition of values Url,Email,Tag,Creation date,Notes,Level(strong, low,medium)
-		#  importance(Stared/Unstarred),Last modified.
+# TODO: addition of values Url,Email,Tag,Creation date,Notes,Level(strong, low,medium)
+	#  importance(Stared/Unstarred),Last modified.
 
 		self.cursor_obj.execute(
 			"""
@@ -66,4 +66,4 @@ class DatabaseConnection(object):
 			print(row)
 		self.con.commit()
 
-	# TODO: def update_data(self):
+# TODO: def update_data(self):

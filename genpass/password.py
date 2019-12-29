@@ -22,7 +22,6 @@ SOFTWARE.
 import click # Used for command line interface.
 import diceware # Used for creating password.
 # TODO:from datetime import datetime
-
 from passlib.context import CryptContext
 from database import DatabaseConnection
 
@@ -42,7 +41,7 @@ def encrypt_pass():
 
 
 @click.command(help="Enter required data")
-def create_pass():
+def createpass():
     """Used for taking input from user to create password"""
     portal_name = click.prompt('Enter portal name', default="None")
 
@@ -58,6 +57,6 @@ def create_pass():
     db_obj.insert_data(portal_name=portal_name, password=password)
 
 @click.command(help="printing data")
-def print_data(): # Print data here
+def showpass(): # Print data here
         db_obj.show_data()
 
