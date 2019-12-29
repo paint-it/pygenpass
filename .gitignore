@@ -1,6 +1,7 @@
 #add file which you want to ignore
 # Byte-compiled / optimized / DLL files
-# __pycache__/
+ __pycache__/
+ *.db
 # *.py[cod]
 # *$py.class
 #
