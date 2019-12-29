@@ -1,59 +1,64 @@
-import sqlite3
+"""
+Copyright (c) 2019 paint-it
 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-class DatabaseConnection():
-	''' This is class for database entries of users 
-	    as 1.id
-	       2.portal_name
-	       3.portal_url
-	       4.user_email
-	       5.tag
-	       6.creation_date
-	       7.last_modified text
-	       8.notes
-	       9.level
-	       9.importance
-	    from the file of password.py which will first take input from user and then pass it to 
-	    diceware tool.It will provide password '''	
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 
+import sqlite3 #library for database
 
+class DatabaseConnection(object):
+	""" Class of database entries for users information."""
 
 	def __init__(self):
-		
-		'''The constructor for database connections to the password file 
-		   and for cursor object which used to retrive data from SQL queries '''	
-		
+		"""Used to create database and then to connect with generated databse file"""
+
 		self.con = sqlite3.connect('generated_password.db')
 		self.cursor_obj = self.con.cursor()
-	
-	
-	def create_table(self):
-		'''This method will create table having columns as given below and will pass to execute function ''' 
-		
-		self.cursor_obj.execute(
-			"CREATE TABLE passwords(id integer PRIMARY KEY, portal_name text, portal_url real, user_email text, tag text, notes text, creation_date text, password text)")
-		self.con.commit()
-	
-	
 
-	def insert_data(self, portal_name, portal_url, user_email, tag, notes, password, creation_date):
-		'''This method will insert data in their respective positional argument'''
+	def create_table(self):
+		"""Checked for table is created? if not then created as per input """
 		
 		self.cursor_obj.execute(
-			"INSERT INTO passwords VALUES({name}, {url}, {mail}, {tag}, {notes}, {creation_date}, {password})".format(
-				name=portal_name,url=portal_url,mail=user_email,tag=tag, notes=notes, password=password,
-				creation_date=creation_date
-			)
+			"""
+			CREATE TABLE IF NOT EXISTS passwords(id integer PRIMARY KEY, portal_name text, password varchar )
+			"""
 		)
 		self.con.commit()
 	
-	
+	def insert_data(self, portal_name, password):
+		"""Adding values into database"""
+		self.portal_name = portal_name
+		self.password = password
 
+	# TODO: addition of values Url,Email,Tag,Creation date,Notes,Level(strong, low,medium)
+		#  importance(Stared/Unstarred),Last modified.
+
+		self.cursor_obj.execute(
+			"""
+			INSERT INTO passwords(portal_name, password) VALUES (?, ?)
+			""",
+			(self.portal_name, self.password),
+		)
+		self.con.commit()
+	
 	def show_data(self):
-		'''This method firstly will show the table named password
-		   which uses fetchall()for getting all entries
-		    and to get that we have run the loop to for rows'''
+		"""All inserted data will showed"""
 		 
 		self.cursor_obj.execute("SELECT * FROM passwords")
 		rows = self.cursor_obj.fetchall()
@@ -61,17 +66,4 @@ class DatabaseConnection():
 			print(row)
 		self.con.commit()
 
-	
-	
-
-	def update_data(self):
-		'''This method will update the changes if their is wrong entry by considering unique id '''
-		self.cursor_obj.execute('UPDATE passwords SET portal_name = "ola",portal_url = "www.ola.com" where id = 1')
-		self.con.commit()
-
-# db = DatabaseConnection()
-# #db.create_table()
-# #db.insert_data()
-# db.show_data()
-# db.update_data()
-# db.show_data()
+	# TODO: def update_data(self):
