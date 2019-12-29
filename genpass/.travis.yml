@@ -1,0 +1,9 @@
+language: python
+python:
+- '3.7'
+install:
+- pip install -r requirements.txt
+- pip install flake8
+script:
+- flake8 --max-line-length 100 genpass/*.py 
+
