@@ -39,8 +39,13 @@ def encrypt_pass():
     password = diceware.get_passphrase()
     return pwd_context.encrypt(password)
 
+@click.command(help="Provide your password")
+def getpass():
+    """Used to take suggestion for passwword from user"""
+    pwd = click.prompt('Enter your password', default="None")
 
 @click.command(help="Enter required data")
+@click.pass_context
 def createpass():
     """Used for taking input from user to create password"""
     portal_name = click.prompt('Enter portal name', default="None")
@@ -53,10 +58,11 @@ def createpass():
     # TODO: portal_url=portal_url, user_email=user_email)
 
     password = encrypt_pass()
+    pwd = getpass()
     db_obj.create_table()
-    db_obj.insert_data(portal_name=portal_name, password=password)
+    db_obj.insert_data(portal_name=portal_name, password=password, pwd=pwd)
 
-@click.command(help="printing data")
+@click.command(help="Printing data")
 def showpass(): # Print data here
         db_obj.show_data()
 

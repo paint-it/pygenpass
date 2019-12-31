@@ -34,32 +34,32 @@ class DatabaseConnection(object):
 	def create_table(self):
 		"""Checked for table is created? if not then created as per required values """
 		
-		self.cursor_obj.execute(
+		self.cursor_obj.execute\
+		(
 			"""
-			CREATE TABLE IF NOT EXISTS passwords(id integer PRIMARY KEY, portal_name text, password varchar )
+			CREATE TABLE IF NOT EXISTS passwords(id integer PRIMARY KEY, portal_name text,
+			 										password varchar, pwd varchar)
 			"""
 		)
 		self.con.commit()
 	
-	def insert_data(self, portal_name, password):
+	def insert_data(self, portal_name, password, pwd):
 		"""Adding values into database"""
 		self.portal_name = portal_name
-		self.password = password
+		self.password = password #showing encrypted password
+		self.pwd = pwd #Inserting user entered password
 
 # TODO: addition of values Url,Email,Tag,Creation date,Notes,Level(strong, low,medium)
 	#  importance(Stared/Unstarred),Last modified.
 
-		self.cursor_obj.execute(
-			"""
-			INSERT INTO passwords(portal_name, password) VALUES (?, ?)
-			""",
-			(self.portal_name, self.password),
+		self.cursor_obj.execute\
+		("""INSERT INTO passwords(portal_name, password, pwd) VALUES (?, ?, ?)""",
+			(self.portal_name, self.password, self.pwd),
 		)
 		self.con.commit()
 	
 	def show_data(self):
 		"""All inserted data will showed"""
-		 
 		self.cursor_obj.execute("SELECT * FROM passwords")
 		rows = self.cursor_obj.fetchall()
 		for row in rows:
