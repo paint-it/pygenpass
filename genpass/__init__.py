@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import click
-from password import createpass, showpass, savepass  # use to create password
+from genpass.password import createpass, showpass, savepass  # use to create password
 
 
 # from password import showpass # use to print all entries
