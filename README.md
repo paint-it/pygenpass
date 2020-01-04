@@ -1,31 +1,63 @@
 # Genpass
 
 ### How to run project?
-* You just need to run __init__.py file 
+* Fork this project on youre github account.
+
+* Create Virtual envirnment on your local machin
+```nashorn js
+$ python3 -m venv <nameofvirtualenv>
+
+``` 
+* Activate virtual envirnment 
+```nashorn js
+
+$ source nameofvirtualenv/bin/activate
+
+```
+* Make a local directory.
+
+* Clone project in your directory.
+```nashorn js
+$ git clone https://github.com/paint-it/genpass.git
+
+```
+* Install setup.py
+```nashorn js
+$ python3 setup.py install
+
+```
+* Use command **manpass**
+
+* You just need to install first setup.py file 
 
 #### Command line options
 ```sh 
-$ python3 __init__.py
-
-Usage: __init__.py [OPTIONS] COMMAND [ARGS]...
-
+$ python3 setup.py install
+ 
 Options:
   --help  Show this message and exit.
 
 Commands:
   createpass  Enter required data
-  showpass    printing data
-
+  savepass    Provide your password
+  showpass    Printing data
 ```
 #### Examples
 * This command will ask for portal name
 ```sh 
-$ python3 __init__.py createpass
+$ manpass createpass
 Enter portal name [None]: 
 ```
-* Show saved passwords
+* Save password
 ```sh
-$ python3 __init__.py showpass
+$ manpass savepass
+Enter portal name [None]:
+Enter your password [None]:
+```
+* Show Password
+```nashorn js
+$ manpass showpass
+Enter portal name [None]:
 ```
 
 ### How to contribute to this project?
