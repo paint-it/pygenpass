@@ -20,7 +20,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import click
-from password import createpass, showpass, getpass  # use to create password
+from password import createpass, showpass, savepass  # use to create password
 
 
 # from password import showpass # use to print all entries
@@ -33,7 +33,7 @@ def main():
 
 main.add_command(createpass)
 main.add_command(showpass)
-main.add_command(getpass)
+main.add_command(savepass)
 
 if __name__ == "__main__":
     main()
