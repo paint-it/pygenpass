@@ -1,29 +1,29 @@
-#Steps to contribute: 
-* Fork this project on youre github account.
+# Steps to contribute: 
+* Fork this project on your GitHub account
 
-* Create Virtual envirnment on your local machin.
+* Create virtual environment on your local machine
 ```nashorn js
-$ python3 -m venv <nameofvirtualenv>
+$ python3 -m venv <name_of_virtualenv>
 
 ``` 
-* Activate virtual envirnment 
+* Activate virtual environment 
 ```nashorn js
 
-$ source nameofvirtualenv/bin/activate
+$ source <name_of_virtualenv>/bin/activate
 
 ```
-* Make a local directory.
+* Make a local directory
 
-* Clone project in your directory.
+* Clone project in your directory
 ```nashorn js
 $ git clone https://github.com/paint-it/genpass.git
 
 ```
  
-* update with your chnages and install project locally using setup.py file
+* Update with your changes and install project locally using **setup.py** file
 ```nashorn js
-python3 setup.py install
+$ python3 setup.py install
 ```
-* After suceesful installation and try **manpass** command.  
-* Commit this chnages and make a PR.
-* Be a part of genpass.
+* After successful installation; try **manpass** command  
+* Commit this changes and make a PR
+* Be a part of **Genpass!!!**
