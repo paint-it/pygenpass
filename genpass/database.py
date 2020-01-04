@@ -20,50 +20,39 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-import sqlite3 #library for database
+import sqlite3  # library for database
+
 
 class DatabaseConnection(object):
 	""" Class of database entries for user's information."""
 
 	def __init__(self):
 		"""Used to create database and then to connect with generated databse file"""
-
 		self.con = sqlite3.connect('generated_password.db')
 		self.cursor_obj = self.con.cursor()
 
 	def create_table(self):
 		"""Checked for table is created? if not then created as per required values """
-		
-		self.cursor_obj.execute(
-			"""
-			CREATE TABLE IF NOT EXISTS passwords(id integer PRIMARY KEY, portal_name text, password varchar )
-			"""
-		)
+		self.cursor_obj.execute("""CREATE TABLE IF NOT EXISTS passwords(
+		id integer PRIMARY KEY, portal_name text, password varchar, pwd varchar)""")
 		self.con.commit()
-	
+
 	def insert_data(self, portal_name, password):
 		"""Adding values into database"""
 		self.portal_name = portal_name
-		self.password = password
+		self.password = password  # Inserting user entered password
 
-# TODO: addition of values Url,Email,Tag,Creation date,Notes,Level(strong, low,medium)
-	#  importance(Stared/Unstarred),Last modified.
-
-		self.cursor_obj.execute(
-			"""
-			INSERT INTO passwords(portal_name, password) VALUES (?, ?)
-			""",
-			(self.portal_name, self.password),
-		)
+		self.cursor_obj.execute("""INSERT INTO passwords(portal_name, password) VALUES (?, ?)""",
+			(self.portal_name, self.password),)
 		self.con.commit()
-	
-	def show_data(self):
+
+	def show_data(self, portal_name):
 		"""All inserted data will showed"""
-		 
-		self.cursor_obj.execute("SELECT * FROM passwords")
+		self.portal_name = portal_name
+
+		self.cursor_obj.execute("""SELECT password FROM passwords WHERE portal_name=?""",
+								(self.portal_name,))
 		rows = self.cursor_obj.fetchall()
 		for row in rows:
-			print(row)
+			return row[0]
 		self.con.commit()
-
-# TODO: def update_data(self):

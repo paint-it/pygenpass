@@ -19,44 +19,33 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-import click # Used for command line interface.
-import diceware # Used for creating password.
-# TODO:from datetime import datetime
-from passlib.context import CryptContext
+import click  # Used for command line interface
+import diceware  # Used for creating password
 from database import DatabaseConnection
 
 db_obj = DatabaseConnection()
 
-pwd_context = CryptContext(
-schemes=["pbkdf2_sha256"],
-default="pbkdf2_sha256",
-pbkdf2_sha256__default_rounds=30000
-)
 
-
-def encrypt_pass():
-    """Used for encrypting password"""
-    password = diceware.get_passphrase()
-    return pwd_context.encrypt(password)
+@click.command(help="Provide your password")
+def savepass():
+    """Used to take portal name and password from user"""
+    portal_name = click.prompt('Enter portal name', default="None")
+    pwd = click.prompt('Enter your password', default="None", hide_input=True)
+    db_obj.create_table()
+    db_obj.insert_data(portal_name=portal_name, password=pwd)
 
 
 @click.command(help="Enter required data")
 def createpass():
     """Used for taking input from user to create password"""
     portal_name = click.prompt('Enter portal name', default="None")
-
-    # TODO: portal_url = click.prompt('Enter portal_url',default="None")
-    # TODO: user_email = click.prompt('Enter mail-id',default="None")
-    # TODO: tag = click.prompt('Enter tags',default="None")
-    # TODO: notes = click.prompt('Enter notes',default="None")
-    # TODO: creation_date = datetime.now()
-    # TODO: portal_url=portal_url, user_email=user_email)
-
-    password = encrypt_pass()
+    password = diceware.get_passphrase()
     db_obj.create_table()
     db_obj.insert_data(portal_name=portal_name, password=password)
 
-@click.command(help="printing data")
-def showpass(): # Print data here
-        db_obj.show_data()
 
+@click.command(help="Printing data")
+def showpass():
+    portal_name = click.prompt('Enter portal name', default="None")
+    spass = db_obj.show_data(portal_name)
+    print(spass)
