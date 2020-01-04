@@ -1,39 +1,69 @@
 # Genpass
 
 ### How to run project?
-* You just need to run __init__.py file 
+* Fork this project on your GitHub account
+
+* Create virtual environment on your local machine
+```nashorn js
+$ python3 -m venv <name_of_virtualenv>
+
+``` 
+* Activate virtual environment 
+```nashorn js
+
+$ source <name_of_virtualenv>/bin/activate
+
+```
+* Make a local directory
+
+* Clone project in your directory
+```nashorn js
+$ git clone https://github.com/paint-it/genpass.git
+
+```
+* Install setup.py
+```nashorn js
+$ python3 setup.py install
+
+```
+* Use command **manpass** 
 
 #### Command line options
 ```sh 
-$ python3 __init__.py
-
-Usage: __init__.py [OPTIONS] COMMAND [ARGS]...
-
+$ manpass
+ 
 Options:
   --help  Show this message and exit.
 
 Commands:
   createpass  Enter required data
-  showpass    printing data
-
+  savepass    Provide your password
+  showpass    Printing data
 ```
 #### Examples
-* This command will ask for portal name
+* This command will ask for portal name and will create random password
 ```sh 
-$ python3 __init__.py createpass
+$ manpass createpass
 Enter portal name [None]: 
 ```
-* Show saved passwords
+* This command will ask for portal name and existing password
 ```sh
-$ python3 __init__.py showpass
+$ manpass savepass
+Enter portal name [None]:
+Enter your password [None]:
+```
+* This command will show password of particular portal
+```nashorn js
+$ manpass showpass
+Enter portal name [None]:
 ```
 
 ### How to contribute to this project?
-* Please read [contribute.md](https://github.com/paint-it/genpass/blob/master/contributing.md)
+* Please read [contributing.md](https://github.com/paint-it/genpass/blob/master/contributing.md)
 
 ### Information about libraries used in this project?
-* [**Click**](https://pypi.org/project/click/) - It is a third party tool which we have used creatoing commands. We have commands like ```createpass``` and ```showpass```
+* [**Click**](https://pypi.org/project/click/) - It is a third party tool which we have used for creating commands. We have commands like ```createpass```, ```savepass```,```showpass```
 
-* [**Diceware**](https://pypi.org/project/diceware/) - It is used to generate random passsword for user. As we are just managing these passwords in encrypted format to secure your password
+* [**Diceware**](https://pypi.org/project/diceware/) - It is used to generate random passsword for user. As we are managing these passwords
 
 
