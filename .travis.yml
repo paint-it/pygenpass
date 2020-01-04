@@ -5,5 +5,5 @@ install:
 - pip install -r requirements.txt
 - pip install flake8
 script:
-- flake8 --ignore=E128,W191,E117 --max-line-length 100 genpass/*.py 
+- flake8 --ignore=E128,W191,E117 --max-line-length 100 genpass/*.py setup.py 
 

@@ -21,7 +21,7 @@ SOFTWARE.
 """
 import click  # Used for command line interface
 import diceware  # Used for creating password
-from database import DatabaseConnection
+from genpass.database import DatabaseConnection
 
 db_obj = DatabaseConnection()
 
