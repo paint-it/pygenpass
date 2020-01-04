@@ -6,9 +6,9 @@ with open("README.md") as readme_file:
 install_requires = ["setuptools", "diceware", "click"]
 
 setup(
-    name="gempass",
+    name="manpass",
     packages=find_packages(),
-    entry_points={"console_scripts": ["gempass = genpass.__init__:main"]},
+    entry_points={"console_scripts": ["manpass = genpass.__init__:main"]},
     version="0.0.1",
     author="Mayuri Lahane",
     author_email="mayurilahane1998@gmail.com",
@@ -21,7 +21,4 @@ setup(
     namespace_packages=[],
     include_package_data=True,
     zip_safe=False,
-    install_requires=install_requires,
-   # scripts=["test_readit.py"],
-)
-
+    install_requires=install_requires,)
