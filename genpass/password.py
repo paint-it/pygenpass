@@ -25,8 +25,11 @@ from genpass.database import DatabaseConnection
 
 db_obj = DatabaseConnection()
 
+@click.command(help="Show Version")
+def version():
+    click.echo("Genpass v0.0.1")
 
-@click.command(help="Provide your password")
+@click.command(help="Save existing passwords")
 def savepass():
     """Used to take portal name and password from user"""
     portal_name = click.prompt('Enter portal name', default="None")
@@ -35,7 +38,7 @@ def savepass():
     db_obj.insert_data(portal_name=portal_name, password=pwd)
 
 
-@click.command(help="Enter required data")
+@click.command(help="Create new password")
 def createpass():
     """Used for taking input from user to create password"""
     portal_name = click.prompt('Enter portal name', default="None")
@@ -44,7 +47,7 @@ def createpass():
     db_obj.insert_data(portal_name=portal_name, password=password)
 
 
-@click.command(help="Printing data")
+@click.command(help="Show password")
 def showpass():
     portal_name = click.prompt('Enter portal name', default="None")
     spass = db_obj.show_data(portal_name)
