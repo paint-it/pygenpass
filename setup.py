@@ -9,7 +9,7 @@ setup(
     name="pygenpass",
     packages=find_packages(),
     entry_points={"console_scripts": ["pygenpass = genpass.__init__:main"]},
-    version="0.0.1",
+    version="0.1",
     author="Mayuri Lahane",
     author_email="mayurilahane1998@gmail.com",
     description="Genpass - Command Line Password Manager Tool",
