@@ -22,9 +22,11 @@ SOFTWARE.
 import click
 from genpass.password import createpass, showpass, savepass, version  # use to create password
 
+
 @click.group()
 def main():
     pass
+
 
 main.add_command(createpass)
 main.add_command(showpass)

@@ -25,9 +25,11 @@ from genpass.database import DatabaseConnection
 
 db_obj = DatabaseConnection()
 
+
 @click.command(help="Show Version")
 def version():
     click.echo("Genpass v0.0.1")
+
 
 @click.command(help="Save existing passwords")
 def savepass():
