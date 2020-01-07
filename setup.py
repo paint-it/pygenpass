@@ -5,15 +5,17 @@ with open("README.rst") as readme_file:
 
 install_requires = ["setuptools", "diceware", "click"]
 
+setup_requirements = ["setuptools_scm"]
+
 setup(
     name="pygenpass",
     packages=find_packages(),
     entry_points={"console_scripts": ["pygenpass = genpass.__init__:main"]},
-    version="0.1",
     author="Mayuri Lahane",
     author_email="mayurilahane1998@gmail.com",
     description="Genpass - Command Line Password Manager Tool",
     long_description=long_description,
+    setup_requires=setup_requirements,
     license="MIT",
     keywords="genpass pygenpass gempass passwordmanager manager encryption",
     url="https://github.com/paint-it/genpass",
