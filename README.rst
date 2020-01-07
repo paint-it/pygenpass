@@ -9,14 +9,14 @@ How to run project?
 
 .. code-block:: bash
 
-    $ python3 -m venv <new_env>
+    $ python3 -m venv new_env
 
 
 * Activate virtual environment
 
 .. code-block:: bash
 
-    $ source <new_env>/bin/activate
+    $ source new_env/bin/activate
 
 
 * Make a local directory
@@ -62,6 +62,7 @@ Examples
 * This command will ask for portal name and will create random password
 
 .. code-block:: bash
+
     $ pygenpass createpass
 
     Enter portal name [None]:
