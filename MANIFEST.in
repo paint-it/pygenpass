@@ -1,0 +1,4 @@
+include genpass/*.py
+include README.rst
+include LICENSE
+include requirements.txt
