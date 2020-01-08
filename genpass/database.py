@@ -34,7 +34,7 @@ class DatabaseConnection(object):
 	def create_table(self):
 		"""Checked for table is created? if not then created as per required values """
 		self.cursor_obj.execute("""CREATE TABLE IF NOT EXISTS passwords(
-		id integer PRIMARY KEY, portal_name text, password varchar, pwd varchar)""")
+		id integer PRIMARY KEY, portal_name text PRIMARY KEY NOT NULL, password varchar)""")
 		self.con.commit()
 
 	def insert_data(self, portal_name, password):
