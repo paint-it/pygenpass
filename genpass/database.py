@@ -54,6 +54,14 @@ class DatabaseConnection(object):
 								(self.portal_name,))
 		self.con.commit()
 
+	def update_data(self, portal_name, password):
+		"""Updating values in database"""
+		self.portal_name = portal_name
+		self.password = password
+		self.cursor_obj.execute("""UPDATE passwords SET password =? WHERE portal_name =?""",
+								(self.password, self.portal_name))
+		self.con.commit()
+
 	def show_data(self, portal_name):
 		"""All inserted data will showed"""
 		self.portal_name = portal_name
