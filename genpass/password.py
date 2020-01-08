@@ -38,6 +38,14 @@ def delpass():
     db_obj.delete_data(portal_name=portal_name)
 
 
+@click.command(help="Update password")
+def modpass():
+    """Update existing password"""
+    portal_name = click.prompt('Enter portal name', default="None")
+    mod = click.prompt('Enter new password', default="None", hide_input=True)
+    db_obj.update_data(portal_name=portal_name, password=mod)
+
+
 @click.command(help="Save existing passwords")
 def savepass():
     """Used to take portal name and password from user"""
