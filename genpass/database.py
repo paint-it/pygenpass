@@ -46,6 +46,14 @@ class DatabaseConnection(object):
 			(self.portal_name, self.password),)
 		self.con.commit()
 
+	def delete_data(self, portal_name):
+		"""Deleting values from database"""
+		self.portal_name = portal_name
+
+		self.cursor_obj.execute("""DELETE from passwords where portal_name = ?""",
+								(self.portal_name,))
+		self.con.commit()
+
 	def show_data(self, portal_name):
 		"""All inserted data will showed"""
 		self.portal_name = portal_name
