@@ -20,7 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 import click
-from genpass.password import createpass, showpass, savepass, version  # use to create password
+from genpass.password import createpass
+from genpass.password import savepass
+from genpass.password import showpass
+from genpass.password import delpass
+from genpass.password import version
 
 
 @click.group()
@@ -31,6 +35,7 @@ def main():
 main.add_command(createpass)
 main.add_command(showpass)
 main.add_command(savepass)
+main.add_command(delpass)
 main.add_command(version)
 
 if __name__ == "__main__":

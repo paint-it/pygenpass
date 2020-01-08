@@ -31,6 +31,13 @@ def version():
     click.echo("Genpass v0.1")
 
 
+@click.command(help="Delete password")
+def delpass():
+    """used to delete existing password"""
+    portal_name = click.prompt('Enter portal name', default="None")
+    db_obj.delete_data(portal_name=portal_name)
+
+
 @click.command(help="Save existing passwords")
 def savepass():
     """Used to take portal name and password from user"""
