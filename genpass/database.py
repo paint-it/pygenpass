@@ -33,18 +33,22 @@ class DatabaseConnection(object):
 
 	def create_table(self):
 		"""Checked for table is created? if not then created as per required values """
-		self.cursor_obj.execute("""CREATE TABLE IF NOT EXISTS passwords(
-		id integer PRIMARY KEY, portal_name text PRIMARY KEY NOT NULL, password varchar)""")
+		self.cursor_obj.execute(
+			"""CREATE TABLE IF NOT EXISTS passwords
+			(id integer PRIMARY KEY,portal_name text NOT NULL UNIQUE, password varchar)
+			""")
 		self.con.commit()
 
 	def insert_data(self, portal_name, password):
 		"""Adding values into database"""
-		self.portal_name = portal_name
-		self.password = password  # Inserting user entered password
-
-		self.cursor_obj.execute("""INSERT INTO passwords(portal_name, password) VALUES (?, ?)""",
-			(self.portal_name, self.password),)
-		self.con.commit()
+		try:
+			self.portal_name = portal_name
+			self.password = password
+			self.cursor_obj.execute("""INSERT INTO passwords(portal_name, password) VALUES (?, ?)""",
+									(self.portal_name, self.password),)
+			self.con.commit()
+		except sqlite3.IntegrityError:
+			print("Portal name already exists")
 
 	def delete_data(self, portal_name):
 		"""Deleting values from database"""
