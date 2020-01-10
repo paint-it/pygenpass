@@ -35,17 +35,25 @@ class DatabaseConnection(object):
 		"""Checked for table is created? if not then created as per required values """
 		self.cursor_obj.execute(
 			"""CREATE TABLE IF NOT EXISTS passwords
-			(id integer PRIMARY KEY,portal_name text NOT NULL UNIQUE, password varchar)
+			(id integer PRIMARY KEY,portal_name text NOT NULL UNIQUE, password varchar,
+			creation_date varchar, email varchar, portal_url varchar)
 			""")
 		self.con.commit()
 
-	def insert_data(self, portal_name, password):
+	def insert_data(self, portal_name, password, creation_date, email, portal_url):
 		"""Adding values into database"""
 		try:
 			self.portal_name = portal_name
 			self.password = password
-			self.cursor_obj.execute("""INSERT INTO passwords(portal_name, password) VALUES (?, ?)""",
-									(self.portal_name, self.password),)
+			self.creation_date = creation_date
+			self.email = email
+			self.portal_url = portal_url
+			self.cursor_obj.execute\
+					("""INSERT INTO passwords
+					(portal_name, password, creation_date, email, portal_url)
+					 VALUES (?, ?, ?, ?, ?)""", 
+					 (self.portal_name, self.password, self.creation_date, self.email, self.portal_url),
+					 )
 			self.con.commit()
 		except sqlite3.IntegrityError:
 			print("Portal name already exists")

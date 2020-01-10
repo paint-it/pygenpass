@@ -22,6 +22,7 @@ SOFTWARE.
 import click  # Used for command line interface
 import diceware  # Used for creating password
 from genpass.database import DatabaseConnection
+from datetime import date
 
 db_obj = DatabaseConnection()
 
@@ -60,8 +61,13 @@ def createpass():
     """Used for taking input from user to create password"""
     portal_name = click.prompt('Enter portal name', default="None")
     password = diceware.get_passphrase()
+    creation_date = date.today()
+    email = click.prompt('Enter email id', default="None")
+    portal_url = click.prompt('Enter portal url', default="None")
     db_obj.create_table()
-    db_obj.insert_data(portal_name=portal_name, password=password)
+    db_obj.insert_data(portal_name=portal_name, password=password,
+                       creation_date=creation_date, email=email,
+                       portal_url=portal_url)
 
 
 @click.command(help="Show password")
