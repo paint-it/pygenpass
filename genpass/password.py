@@ -52,8 +52,17 @@ def savepass():
     """Used to take portal name and password from user"""
     portal_name = click.prompt("Enter portal name", default="None")
     pwd = click.prompt("Enter your password", default="None", hide_input=True)
+    creation_date = date.today()
+    email = click.prompt("Enter email id", default="None")
+    portal_url = click.prompt("Enter portal url", default="None")
     db_obj.create_table()
-    db_obj.insert_data(portal_name=portal_name, password=pwd)
+    db_obj.insert_data(
+        portal_name=portal_name,
+        password=pwd,
+        creation_date=creation_date,
+        email=email,
+        portal_url=portal_url,
+    )
 
 
 @click.command(help="Create new password")

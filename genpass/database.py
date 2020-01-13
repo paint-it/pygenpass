@@ -23,7 +23,7 @@ SOFTWARE.
 import sqlite3  # library for database
 
 
-class DatabaseConnection(object):
+class DatabaseConnection:
     """ Class of database entries for user's information."""
 
     def __init__(self):
@@ -44,10 +44,10 @@ class DatabaseConnection(object):
     def insert_data(self, portal_name, password, creation_date, email, portal_url):
         """Adding values into database"""
         try:
-            self.portal_name = portal_name
             self.password = password
             self.creation_date = creation_date
             self.email = email
+            self.portal_name = portal_name
             self.portal_url = portal_url
             self.cursor_obj.execute(
                 """INSERT INTO passwords
