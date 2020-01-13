@@ -89,3 +89,12 @@ class DatabaseConnection:
         for row in rows:
             return row[0]
         self.con.commit()
+
+    def show_all_data(self):
+        """Showing all data saved in database"""
+        self.cursor_obj.execute(
+            """SELECT * FROM passwords"""
+        )
+        rows = self.cursor_obj.fetchall()
+        return (rows)
+        self.con.commit()

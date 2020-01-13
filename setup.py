@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 with open("README.rst") as readme_file:
     long_description = readme_file.read()
 
-install_requires = ["setuptools", "click>=5.0", "diceware>=0.9.5"]
+install_requires = ["setuptools", "click>=5.0", "diceware>=0.9.5", "beautifultable>=0.5.0"]
 
 setup_requirements = ["setuptools_scm"]
 
