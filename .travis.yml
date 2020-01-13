@@ -6,8 +6,7 @@ install:
 - pip install flake8
 - pip install rstcheck
 script:
-- flake8 --ignore=E128,W191,E117,E101 --max-line-length 
-    100 genpass/*.py setup.py
+- flake8 --ignore=E128,W191,E117,E101 --max-line-length 100 genpass/*.py setup.py
 - rstcheck README.rst
 
 
