@@ -22,6 +22,7 @@ SOFTWARE.
 import click  # Used for command line interface
 import diceware  # Used for creating password
 from genpass.database import DatabaseConnection
+from datetime import date
 
 db_obj = DatabaseConnection()
 
@@ -34,38 +35,56 @@ def version():
 @click.command(help="Delete password")
 def delpass():
     """used to delete existing password"""
-    portal_name = click.prompt('Enter portal name', default="None")
+    portal_name = click.prompt("Enter portal name", default="None")
     db_obj.delete_data(portal_name=portal_name)
 
 
 @click.command(help="Update password")
 def modpass():
     """Update existing password"""
-    portal_name = click.prompt('Enter portal name', default="None")
-    mod = click.prompt('Enter new password', default="None", hide_input=True)
+    portal_name = click.prompt("Enter portal name", default="None")
+    mod = click.prompt("Enter new password", default="None", hide_input=True)
     db_obj.update_data(portal_name=portal_name, password=mod)
 
 
 @click.command(help="Save existing passwords")
 def savepass():
     """Used to take portal name and password from user"""
-    portal_name = click.prompt('Enter portal name', default="None")
-    pwd = click.prompt('Enter your password', default="None", hide_input=True)
+    portal_name = click.prompt("Enter portal name", default="None")
+    pwd = click.prompt("Enter your password", default="None", hide_input=True)
+    creation_date = date.today()
+    email = click.prompt("Enter email id", default="None")
+    portal_url = click.prompt("Enter portal url", default="None")
     db_obj.create_table()
-    db_obj.insert_data(portal_name=portal_name, password=pwd)
+    db_obj.insert_data(
+        portal_name=portal_name,
+        password=pwd,
+        creation_date=creation_date,
+        email=email,
+        portal_url=portal_url,
+    )
 
 
 @click.command(help="Create new password")
 def createpass():
     """Used for taking input from user to create password"""
-    portal_name = click.prompt('Enter portal name', default="None")
+    portal_name = click.prompt("Enter portal name", default="None")
     password = diceware.get_passphrase()
+    creation_date = date.today()
+    email = click.prompt("Enter email id", default="None")
+    portal_url = click.prompt("Enter portal url", default="None")
     db_obj.create_table()
-    db_obj.insert_data(portal_name=portal_name, password=password)
+    db_obj.insert_data(
+        portal_name=portal_name,
+        password=password,
+        creation_date=creation_date,
+        email=email,
+        portal_url=portal_url,
+    )
 
 
 @click.command(help="Show password")
 def showpass():
-    portal_name = click.prompt('Enter portal name', default="None")
+    portal_name = click.prompt("Enter portal name", default="None")
     spass = db_obj.show_data(portal_name)
     print(spass)
