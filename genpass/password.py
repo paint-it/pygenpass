@@ -43,9 +43,13 @@ def allpass():
     table.top_border_char = "="
     table.header_separator_char = "="
     table.column_headers = ["ID", "PORTAL_NAME", "PASSWORD", "DATE", "EMAIL", "PORTAL_URL"]
-    for row in all_pass:
-        table.append_row([row[0], row[1], row[2], row[3], row[4], row[5]])
-    print(table)
+    try:
+        for row in all_pass:
+            table.append_row([row[0], row[1], row[2], row[3], row[4], row[5]])
+            print(table)
+    except TypeError:
+        print("Use 'pygenpass createpass' or 'pygenpass savepass'")
+
 
 
 @click.command(help="Delete password")

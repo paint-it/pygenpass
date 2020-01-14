@@ -92,9 +92,12 @@ class DatabaseConnection:
 
     def show_all_data(self):
         """Showing all data saved in database"""
-        self.cursor_obj.execute(
-            """SELECT * FROM passwords"""
-        )
-        rows = self.cursor_obj.fetchall()
-        return (rows)
-        self.con.commit()
+        try:
+            self.cursor_obj.execute(
+                """SELECT * FROM passwords"""
+            )
+            rows = self.cursor_obj.fetchall()
+            return (rows)
+            self.con.commit()
+        except sqlite3.OperationalError:
+            print("Please make at least single entry:")
