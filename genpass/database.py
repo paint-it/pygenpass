@@ -27,42 +27,36 @@ class DatabaseConnection:
     """ Class of database entries for user's information."""
 
     def __init__(self):
-        """Used to create database and then to connect with generated databse file"""
+        """Used to create database and then to connect with generated databse file
+        Checked for table is created? if not then created as per required values """
         self.con = sqlite3.connect("generated_password.db")
         self.cursor_obj = self.con.cursor()
-
-    def create_table(self):
-        """Checked for table is created? if not then created as per required values """
         self.cursor_obj.execute(
             """CREATE TABLE IF NOT EXISTS passwords
-			(id integer PRIMARY KEY,portal_name text NOT NULL UNIQUE, password varchar,
-			creation_date varchar, email varchar, portal_url varchar)
-			"""
+    		  (id integer PRIMARY KEY,portal_name text NOT NULL UNIQUE, password varchar,
+    		  creation_date varchar, email varchar, portal_url varchar)
+    		"""
         )
         self.con.commit()
 
     def insert_data(self, portal_name, password, creation_date, email, portal_url):
         """Adding values into database"""
-        try:
-            self.password = password
-            self.creation_date = creation_date
-            self.email = email
-            self.portal_name = portal_name
-            self.portal_url = portal_url
-            self.cursor_obj.execute(
-                """INSERT INTO passwords
-					(portal_name, password, creation_date, email, portal_url)
-					 VALUES (?, ?, ?, ?, ?)""",
-                (self.portal_name, self.password, self.creation_date, self.email, self.portal_url),
-            )
-            self.con.commit()
-        except sqlite3.IntegrityError:
-            print("Portal name already exists")
+        self.password = password
+        self.creation_date = creation_date
+        self.email = email
+        self.portal_name = portal_name
+        self.portal_url = portal_url
+        self.cursor_obj.execute(
+            """INSERT INTO passwords
+            (portal_name, password, creation_date, email, portal_url)
+            VALUES (?, ?, ?, ?, ?)""",
+            (self.portal_name, self.password, self.creation_date, self.email, self.portal_url,),
+        )
+        self.con.commit()
 
     def delete_data(self, portal_name):
         """Deleting values from database"""
         self.portal_name = portal_name
-
         self.cursor_obj.execute(
             """DELETE from passwords where portal_name = ?""", (self.portal_name,)
         )
@@ -81,20 +75,19 @@ class DatabaseConnection:
     def show_data(self, portal_name):
         """All inserted data will showed"""
         self.portal_name = portal_name
-
         self.cursor_obj.execute(
-            """SELECT password FROM passwords WHERE portal_name=?""", (self.portal_name,)
+            """SELECT password FROM passwords WHERE portal_name=?""", (self.portal_name,),
         )
         rows = self.cursor_obj.fetchall()
+
         for row in rows:
             return row[0]
+
         self.con.commit()
 
     def show_all_data(self):
         """Showing all data saved in database"""
-        self.cursor_obj.execute(
-            """SELECT * FROM passwords"""
-        )
+        self.cursor_obj.execute("""SELECT * FROM passwords""")
         rows = self.cursor_obj.fetchall()
-        return (rows)
+        return rows
         self.con.commit()

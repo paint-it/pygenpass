@@ -37,6 +37,8 @@ def version():
 @click.command(help="Show all passwords")
 def allpass():
     all_pass = db_obj.show_all_data()
+    if all_pass == []:
+        print("No records found")
     table = BeautifulTable()
     table.left_border_char = "|"
     table.right_border_char = "|"
@@ -45,22 +47,30 @@ def allpass():
     table.column_headers = ["ID", "PORTAL_NAME", "PASSWORD", "DATE", "EMAIL", "PORTAL_URL"]
     for row in all_pass:
         table.append_row([row[0], row[1], row[2], row[3], row[4], row[5]])
-    print(table)
+        print(table)
 
 
 @click.command(help="Delete password")
 def delpass():
     """used to delete existing password"""
     portal_name = click.prompt("Enter portal name", default="None")
-    db_obj.delete_data(portal_name=portal_name)
+    value_check = db_obj.show_data(portal_name)
+    if value_check is None:
+        print("No records found")
+    else:
+        db_obj.delete_data(portal_name=portal_name)
 
 
 @click.command(help="Update password")
 def modpass():
     """Update existing password"""
     portal_name = click.prompt("Enter portal name", default="None")
-    mod = click.prompt("Enter new password", default="None", hide_input=True)
-    db_obj.update_data(portal_name=portal_name, password=mod)
+    mod_check = db_obj.show_data(portal_name)
+    if mod_check is None:
+        print("No records found")
+    else:
+        mod = click.prompt("Enter new password", default="None", hide_input=True)
+        db_obj.update_data(portal_name=portal_name, password=mod)
 
 
 @click.command(help="Save existing passwords")
@@ -71,7 +81,6 @@ def savepass():
     creation_date = date.today()
     email = click.prompt("Enter email id", default="None")
     portal_url = click.prompt("Enter portal url", default="None")
-    db_obj.create_table()
     db_obj.insert_data(
         portal_name=portal_name,
         password=pwd,
@@ -89,7 +98,6 @@ def createpass():
     creation_date = date.today()
     email = click.prompt("Enter email id", default="None")
     portal_url = click.prompt("Enter portal url", default="None")
-    db_obj.create_table()
     db_obj.insert_data(
         portal_name=portal_name,
         password=password,
@@ -103,4 +111,7 @@ def createpass():
 def showpass():
     portal_name = click.prompt("Enter portal name", default="None")
     spass = db_obj.show_data(portal_name)
-    print(spass)
+    if spass is None:
+        print("No records found")
+    else:
+        print(spass)
