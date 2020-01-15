@@ -50,13 +50,7 @@ class DatabaseConnection:
             """INSERT INTO passwords
             (portal_name, password, creation_date, email, portal_url)
             VALUES (?, ?, ?, ?, ?)""",
-            (
-                self.portal_name,
-                self.password,
-                self.creation_date,
-                self.email,
-                self.portal_url,
-            ),
+            (self.portal_name, self.password, self.creation_date, self.email, self.portal_url,),
         )
         self.con.commit()
 
@@ -82,8 +76,7 @@ class DatabaseConnection:
         """All inserted data will showed"""
         self.portal_name = portal_name
         self.cursor_obj.execute(
-            """SELECT password FROM passwords WHERE portal_name=?""",
-            (self.portal_name,),
+            """SELECT password FROM passwords WHERE portal_name=?""", (self.portal_name,),
         )
         rows = self.cursor_obj.fetchall()
 

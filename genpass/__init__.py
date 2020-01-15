@@ -30,7 +30,6 @@ from genpass.password import modpass
 from genpass.password import allpass
 
 
-
 @click.group()
 def main():
     pass

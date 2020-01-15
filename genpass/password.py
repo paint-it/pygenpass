@@ -37,7 +37,7 @@ def version():
 @click.command(help="Show all passwords")
 def allpass():
     all_pass = db_obj.show_all_data()
-    if all_pass==[]:
+    if all_pass == []:
         print("No records found")
     table = BeautifulTable()
     table.left_border_char = "|"
@@ -55,7 +55,7 @@ def delpass():
     """used to delete existing password"""
     portal_name = click.prompt("Enter portal name", default="None")
     value_check = db_obj.show_data(portal_name)
-    if value_check==None:
+    if value_check is None:
         print("No records found")
     else:
         db_obj.delete_data(portal_name=portal_name)
@@ -65,9 +65,12 @@ def delpass():
 def modpass():
     """Update existing password"""
     portal_name = click.prompt("Enter portal name", default="None")
-    mod = click.prompt("Enter new password", default="None", hide_input=True)
-    db_obj.update_data(portal_name=portal_name, password=mod)
-    print("Nothing to modify")
+    mod_check = db_obj.show_data(portal_name)
+    if mod_check is None:
+        print("No records found")
+    else:
+        mod = click.prompt("Enter new password", default="None", hide_input=True)
+        db_obj.update_data(portal_name=portal_name, password=mod)
 
 
 @click.command(help="Save existing passwords")
@@ -108,4 +111,7 @@ def createpass():
 def showpass():
     portal_name = click.prompt("Enter portal name", default="None")
     spass = db_obj.show_data(portal_name)
-    print(spass)
+    if spass is None:
+        print("No records found")
+    else:
+        print(spass)
