@@ -1,15 +1,18 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 
 with open("README.rst") as readme_file:
     long_description = readme_file.read()
 
-install_requires = ["setuptools", "click>=5.0", "diceware>=0.9.5", "beautifultable>=0.5.0"]
+with open("requirements.txt") as req_file:
+    install_requires = req_file.read().split()
+
 
 setup_requirements = ["setuptools_scm"]
 
 setup(
     name="pygenpass",
-    packages=find_packages(),
     entry_points={"console_scripts": ["pygenpass = genpass.__init__:main"]},
     version="0.1",
     author="Mayuri Lahane",
@@ -20,9 +23,10 @@ setup(
     license="MIT",
     keywords="genpass pygenpass gempass passwordmanager manager encryption",
     url="https://github.com/paint-it/genpass",
-    py_modules=["genpass.__init__"],
+    packages=find_packages(include=["genpass"]),
     namespace_packages=[],
     include_package_data=True,
     zip_safe=False,
     install_requires=install_requires,
+    python_requires=">=3.5",
 )
