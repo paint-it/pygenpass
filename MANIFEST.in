@@ -1,4 +1,1 @@
-include genpass/*.py
-include README.rst
-include LICENSE
-include requirements.txt
+include README.rst LICENSE requirements.txt contributing.md
