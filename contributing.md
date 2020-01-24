@@ -3,20 +3,20 @@
 
 * Create virtual environment on your local machine
 ```nashorn js
-$ python3 -m venv <name_of_virtualenv>
+$ python3 -m venv env
 
 ``` 
 * Activate virtual environment 
 ```nashorn js
 
-$ source <name_of_virtualenv>/bin/activate
+$ source env/bin/activate
 
 ```
 * Make a local directory
 
 * Clone project in your directory
 ```nashorn js
-$ git clone https://github.com/paint-it/genpass.git
+$ git clone https://github.com/paint-it/pygenpass.git
 
 ```
  
@@ -24,6 +24,6 @@ $ git clone https://github.com/paint-it/genpass.git
 ```nashorn js
 $ python3 setup.py install
 ```
-* After successful installation; try **manpass** command  
+* After successful installation; try **pygenpass** command  
 * Commit this changes and make a PR
-* Be a part of **Genpass!!!**
+* Be a part of **PyGenpass!!!**
