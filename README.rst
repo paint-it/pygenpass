@@ -1,5 +1,5 @@
-Genpass - Command Line Password Manager Tool
-============================================
+PyGenpass - Command Line Password Generator and Manager Tool
+============================================================
 
 How to run project?
 ===================
@@ -25,7 +25,7 @@ How to run project?
 
 .. code-block:: bash
 
-    $ git clone https://github.com/paint-it/genpass.git
+    $ git clone https://github.com/paint-it/pygenpass.git
 
 
 * Install setup.py
@@ -49,12 +49,13 @@ Command line options
       --help  Show this message and exit.
 
     Commands:
-
-      createpass  Enter required data
-
-      savepass    Provide your password
-
-      showpass    Printing data
+      allpass     Show all passwords
+      createpass  Create new password
+      delpass     Delete password
+      modpass     Update password
+      savepass    Save existing passwords
+      showpass    Show password
+      version     Show Version
 
 Examples
 ========
@@ -66,6 +67,9 @@ Examples
     $ pygenpass createpass
 
     Enter portal name [None]:
+    Enter email id [None]:
+    Enter portal url [None]:
+
 
 
 * This command will ask for portal name and existing password
@@ -75,8 +79,9 @@ Examples
     $ pygenpass savepass
 
     Enter portal name [None]:
-
     Enter your password [None]:
+    Enter email id [None]:
+    Enter portal url [None]:
 
 * This command will show password of particular portal
 
@@ -100,4 +105,4 @@ Dependencies
 How to contribute to this project?
 ==================================
 
-* Please read `contributing.md <https://github.com/paint-it/genpass/blob/master/contributing.md>`_
+* Please read `contributing.md <https://github.com/paint-it/pygenpass/blob/master/contributing.md>`_
