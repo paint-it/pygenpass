@@ -21,13 +21,13 @@ SOFTWARE.
 """
 
 import click
-from genpass.password import createpass
-from genpass.password import savepass
-from genpass.password import showpass
-from genpass.password import delpass
-from genpass.password import version
-from genpass.password import modpass
-from genpass.password import allpass
+from pygenpass.password import createpass
+from pygenpass.password import savepass
+from pygenpass.password import showpass
+from pygenpass.password import delpass
+from pygenpass.password import version
+from pygenpass.password import modpass
+from pygenpass.password import allpass
 
 
 @click.group()
