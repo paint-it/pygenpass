@@ -31,7 +31,7 @@ db_obj = DatabaseConnection()
 
 @click.command(help="Show Version")
 def version():
-    click.echo("Genpass v0.1")
+    click.echo("PyGenpass v0.2")
 
 
 @click.command(help="Show all passwords")
