@@ -21,7 +21,7 @@ SOFTWARE.
 """
 import click  # Used for command line interface
 import diceware  # Used for creating password
-from genpass.database import DatabaseConnection
+from pygenpass.database import DatabaseConnection
 from datetime import date
 from beautifultable import BeautifulTable  # display output in table format
 
