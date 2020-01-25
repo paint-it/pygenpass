@@ -19,14 +19,21 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-import click  # Used for command line interface
-import diceware  # Used for creating password
-from pygenpass.database import DatabaseConnection
 from datetime import date
-from beautifultable import BeautifulTable  # display output in table format
 
+import click
+import diceware
+from beautifultable import BeautifulTable
+
+from pygenpass.database import DatabaseConnection
 
 db_obj = DatabaseConnection()
+table = BeautifulTable()
+table.left_border_char = "|"
+table.right_border_char = "|"
+table.top_border_char = "="
+table.header_separator_char = "="
+table.column_headers = ["ID", "PORTAL_NAME", "PASSWORD", "DATE", "EMAIL", "PORTAL_URL"]
 
 
 @click.command(help="Show Version")
@@ -39,15 +46,9 @@ def allpass():
     all_pass = db_obj.show_all_data()
     if all_pass == []:
         print("No records found")
-    table = BeautifulTable()
-    table.left_border_char = "|"
-    table.right_border_char = "|"
-    table.top_border_char = "="
-    table.header_separator_char = "="
-    table.column_headers = ["ID", "PORTAL_NAME", "PASSWORD", "DATE", "EMAIL", "PORTAL_URL"]
     for row in all_pass:
         table.append_row([row[0], row[1], row[2], row[3], row[4], row[5]])
-        print(table)
+    print(table)
 
 
 @click.command(help="Delete password")

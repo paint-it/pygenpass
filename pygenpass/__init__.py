@@ -19,15 +19,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-
 import click
+
+from pygenpass.password import allpass
 from pygenpass.password import createpass
+from pygenpass.password import delpass
+from pygenpass.password import modpass
 from pygenpass.password import savepass
 from pygenpass.password import showpass
-from pygenpass.password import delpass
 from pygenpass.password import version
-from pygenpass.password import modpass
-from pygenpass.password import allpass
 
 
 @click.group()
