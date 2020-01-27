@@ -28,12 +28,9 @@ How to run project?
     $ git clone https://github.com/paint-it/pygenpass.git
 
 
-* Install setup.py or install using pip
- 
-.. code-block:: bash
-   
-    $ pip install pygenpass
+* Install setup.py
 
+.. code-block:: bash
 
     $ python3 setup.py install
 
