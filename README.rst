@@ -3,8 +3,6 @@ PyGenpass - Command Line Password Generator and Manager Tool
 
 How to run project?
 ===================
-
-
 * Create a virtual environment on your local machine
 
 .. code-block:: bash
@@ -27,22 +25,19 @@ How to run project?
 
     $ git clone https://github.com/paint-it/pygenpass.git
 
+* Install using pip or setup.py
 
-* Install setup.py or install using pip
- 
 .. code-block:: bash
-   
+
     $ pip install pygenpass
 
 
     $ python3 setup.py install
 
-
 * Use command **pygenpass**
 
 Command line options
 ====================
-
 .. code-block:: bash
 
     $ pygenpass
@@ -62,7 +57,6 @@ Command line options
 
 Examples
 ========
-
 * This command will ask for portal name and will create random password
 
 .. code-block:: bash
@@ -107,5 +101,4 @@ Dependencies
 
 How to contribute to this project?
 ==================================
-
 * Please read `contributing.md <https://github.com/paint-it/pygenpass/blob/master/contributing.md>`_

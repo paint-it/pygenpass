@@ -19,7 +19,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-
 import sqlite3  # library for database
 
 
@@ -32,10 +31,10 @@ class DatabaseConnection:
         self.con = sqlite3.connect("generated_password.db")
         self.cursor_obj = self.con.cursor()
         self.cursor_obj.execute(
-            """CREATE TABLE IF NOT EXISTS passwords
-    		  (id integer PRIMARY KEY,portal_name text NOT NULL UNIQUE, password varchar,
-    		  creation_date varchar, email varchar, portal_url varchar)
-    		"""
+            """CREATE TABLE IF NOT EXISTS passwords(
+            id integer PRIMARY KEY,portal_name text NOT NULL UNIQUE, password varchar,
+            creation_date varchar, email varchar, portal_url varchar)
+            """
         )
         self.con.commit()
 
@@ -50,7 +49,7 @@ class DatabaseConnection:
             """INSERT INTO passwords
             (portal_name, password, creation_date, email, portal_url)
             VALUES (?, ?, ?, ?, ?)""",
-            (self.portal_name, self.password, self.creation_date, self.email, self.portal_url,),
+            (self.portal_name, self.password, self.creation_date, self.email, self.portal_url),
         )
         self.con.commit()
 
@@ -76,7 +75,7 @@ class DatabaseConnection:
         """All inserted data will showed"""
         self.portal_name = portal_name
         self.cursor_obj.execute(
-            """SELECT password FROM passwords WHERE portal_name=?""", (self.portal_name,),
+            """SELECT password FROM passwords WHERE portal_name=?""", (self.portal_name,)
         )
         rows = self.cursor_obj.fetchall()
 
