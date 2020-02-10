@@ -21,6 +21,8 @@ SOFTWARE.
 """
 import sqlite3  # library for database
 
+from termcolor import colored
+
 
 class DatabaseConnection:
     """ Class of database entries for user's information."""
@@ -45,12 +47,17 @@ class DatabaseConnection:
         self.email = email
         self.portal_name = portal_name
         self.portal_url = portal_url
-        self.cursor_obj.execute(
-            """INSERT INTO passwords
-            (portal_name, password, creation_date, email, portal_url)
-            VALUES (?, ?, ?, ?, ?)""",
-            (self.portal_name, self.password, self.creation_date, self.email, self.portal_url),
-        )
+        try:
+            self.cursor_obj.execute(
+                """INSERT INTO passwords
+                (portal_name, password, creation_date, email, portal_url)
+                VALUES (?, ?, ?, ?, ?)""",
+                (self.portal_name, self.password, self.creation_date, self.email, self.portal_url),
+            )
+        except sqlite3.IntegrityError:
+            print(
+                colored("Already exists with the same name. Try with another Portal_name", "green")
+            )
         self.con.commit()
 
     def delete_data(self, portal_name):

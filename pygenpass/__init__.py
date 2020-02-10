@@ -21,12 +21,12 @@ SOFTWARE.
 """
 import click
 
-from pygenpass.password import allpass
-from pygenpass.password import createpass
-from pygenpass.password import delpass
-from pygenpass.password import modpass
-from pygenpass.password import savepass
-from pygenpass.password import showpass
+from pygenpass.password import add
+from pygenpass.password import all
+from pygenpass.password import create
+from pygenpass.password import delete
+from pygenpass.password import modify
+from pygenpass.password import show
 from pygenpass.password import version
 
 
@@ -35,12 +35,12 @@ def main():
     pass
 
 
-main.add_command(allpass)
-main.add_command(modpass)
-main.add_command(createpass)
-main.add_command(showpass)
-main.add_command(savepass)
-main.add_command(delpass)
+main.add_command(all)
+main.add_command(modify)
+main.add_command(create)
+main.add_command(show)
+main.add_command(add)
+main.add_command(delete)
 main.add_command(version)
 
 if __name__ == "__main__":

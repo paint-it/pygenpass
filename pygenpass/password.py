@@ -24,6 +24,7 @@ from datetime import date
 import click
 import diceware
 from beautifultable import BeautifulTable
+from termcolor import colored
 
 from pygenpass.database import DatabaseConnection
 
@@ -38,21 +39,21 @@ table.column_headers = ["ID", "PORTAL_NAME", "PASSWORD", "DATE", "EMAIL", "PORTA
 
 @click.command(help="Show Version")
 def version():
-    click.echo("PyGenpass v0.2")
+    click.echo(colored("PyGenpass v0.2", "green"))
 
 
 @click.command(help="Show all passwords")
-def allpass():
+def all():
     all_pass = db_obj.show_all_data()
     if all_pass == []:
-        print("No records found")
+        print(colored("No records found", "green"))
     for row in all_pass:
         table.append_row([row[0], row[1], row[2], row[3], row[4], row[5]])
     print(table)
 
 
 @click.command(help="Delete password")
-def delpass():
+def delete():
     """used to delete existing password"""
     portal_name = click.prompt("Enter portal name", default="None")
     value_check = db_obj.show_data(portal_name)
@@ -63,7 +64,7 @@ def delpass():
 
 
 @click.command(help="Update password")
-def modpass():
+def modify():
     """Update existing password"""
     portal_name = click.prompt("Enter portal name", default="None")
     mod_check = db_obj.show_data(portal_name)
@@ -74,8 +75,8 @@ def modpass():
         db_obj.update_data(portal_name=portal_name, password=mod)
 
 
-@click.command(help="Save existing passwords")
-def savepass():
+@click.command(help="Add existing passwords")
+def add():
     """Used to take portal name and password from user"""
     portal_name = click.prompt("Enter portal name", default="None")
     pwd = click.prompt("Enter your password", default="None", hide_input=True)
@@ -92,7 +93,7 @@ def savepass():
 
 
 @click.command(help="Create new password")
-def createpass():
+def create():
     """Used for taking input from user to create password"""
     portal_name = click.prompt("Enter portal name", default="None")
     password = diceware.get_passphrase()
@@ -109,10 +110,10 @@ def createpass():
 
 
 @click.command(help="Show password")
-def showpass():
+def show():
     portal_name = click.prompt("Enter portal name", default="None")
     spass = db_obj.show_data(portal_name)
     if spass is None:
-        print("No records found")
+        print(colored("No records found", "green"))
     else:
         print(spass)
