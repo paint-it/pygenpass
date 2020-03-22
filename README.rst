@@ -47,13 +47,13 @@ Command line options
       --help  Show this message and exit.
 
     Commands:
-      allpass     Show all passwords
-      createpass  Create new password
-      delpass     Delete password
-      modpass     Update password
-      savepass    Save existing passwords
-      showpass    Show password
-      version     Show Version
+      all     Show all passwords
+      create  Create new password
+      delete  Delete password
+      modify  Update password
+      save    Save existing passwords
+      show    Show password
+      version  Show Version
 
 Examples
 ========
@@ -61,7 +61,7 @@ Examples
 
 .. code-block:: bash
 
-    $ pygenpass createpass
+    $ pygenpass create
 
     Enter portal name [None]:
     Enter email id [None]:
@@ -73,7 +73,7 @@ Examples
 
 .. code-block:: bash
 
-    $ pygenpass savepass
+    $ pygenpass save
 
     Enter portal name [None]:
     Enter your password [None]:
@@ -84,7 +84,7 @@ Examples
 
 .. code-block:: bash
 
-    $ pygenpass showpass
+    $ pygenpass show
 
     Enter portal name [None]:
 
